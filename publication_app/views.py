@@ -10,7 +10,6 @@ def main_page(request):
     posts = Post.objects.filter(is_public=True, ).order_by("-create_date", "-id").all()
     context = {
         "title": "Hi world",
-        "body": "Somebody",
         "posts": posts
     }
     return render(request, "mainpage.html", context)

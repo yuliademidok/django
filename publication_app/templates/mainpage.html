@@ -8,8 +8,12 @@
 <div>
     {% for post in posts %}
     <h2> {{ post.title }} </h2>
-    <div> {{ post.text }} </div>
+    {% if post.image %}
+    <div><img src="{{post.image.url}}">Текст</img></div>
+    {% endif %}
+    <div>{{post.text}}</div>
     {% endfor %}
+
 </div>
 </body>
 </html>
