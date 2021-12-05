@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "publication_app",
+    "accounts_app",
+    "profile_app",
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,9 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login/'
+LOGOUT_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'accounts_app.User'

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'publication_app/style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+
+<article>
+    <header>
+        <form method="get" action="{% url 'publication:main_page' %}">
+            <button type="submit">Go to the main page</button>
+            <a href="{% url 'accounts:logout' %}" class="">Logout</a>
+        </form>
+    </header>
+</article>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

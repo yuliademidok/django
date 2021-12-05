@@ -1,0 +1,22 @@
+{% extends "publication_app/base.html" %}
+
+{% block content %}
+<div>
+    <form method="get" action="{% url 'publication:add_post' %}">
+        <button type="submit">Create new post</button>
+    </form>
+</div>
+
+<div>
+    {% for post in posts %}
+    <a href="{% url 'publication:post_detail' post.id %}">{{ post.title }}</a>
+    {% if post.image %}
+    <div><img src="{{ post.image.url }}" alt=""></div>
+    {% endif %}
+    <a href="{% url 'profile:profile' post.user %}">{{ post.user }}</a>
+    <div>{{ post.text }}</div>
+    <br>
+    {% endfor %}
+
+</div>
+{% endblock %}
