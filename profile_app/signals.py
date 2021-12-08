@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete, pre_save, pre_delete
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
@@ -9,12 +9,7 @@ from .models import Profile
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        slug = slugify(instance.username)
-        Profile.objects.create(user=instance, slug=slug)
-
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.slug = slugify(instance.username)
-    instance.profile.save()
-
+        # slug = slugify(instance.username)
+        # Profile.objects.create(user=instance, slug=slug)
+        profile = Profile(user=instance, slug=slugify(instance.username))
+        profile.save()

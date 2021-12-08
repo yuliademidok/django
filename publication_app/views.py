@@ -31,7 +31,6 @@ class ResultView(LoginRequiredMixin, generic.DetailView):
 
 class PostCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'publication_app/add_post.html'
-    # fields = '__all__'
 
     def get(self, request, *args, **kwargs):
         formset = PostForm()

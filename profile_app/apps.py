@@ -7,4 +7,3 @@ class ProfileAppConfig(AppConfig):
 
     def ready(self):
         import profile_app.signals  # noqa
-

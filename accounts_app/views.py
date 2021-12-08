@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
@@ -25,8 +24,7 @@ class Logout(LogoutView):
 
 class SignUp(generic.CreateView):
     template_name = "accounts_app/signup.html"
-    form = SignUpForm
-    success_url = reverse_lazy('login')
+    # success_url = reverse_lazy('login')
 
     def get(self, request, *args, **kwargs):
         form = SignUpForm()

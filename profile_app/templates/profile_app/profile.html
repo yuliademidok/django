@@ -8,10 +8,18 @@
 </div>
 
 <div>
+
     <div>
         {{ profile.username }}
         <img src="{{ profile.avatar.url }}" alt="">
+
+        <form method="get" action="{% url 'profile:update_profile' %}">
+            <button type="submit">Edit profile</button>
+        </form>
+
     </div>
+
+    <br>
 
     {% for post in posts %}
     <a href="{% url 'publication:post_detail' post.id %}">{{ post.title }}</a>

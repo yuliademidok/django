@@ -1,9 +1,14 @@
 from django.contrib import admin
 
+from profile_app.models import Profile
 from .models import User
 
 
-@admin.register(User)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ("id", "username", )
+class ProfileInLint(admin.StackedInline):
+    model = Profile
 
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ("id", "username", )
+    inlines = (ProfileInLint, )

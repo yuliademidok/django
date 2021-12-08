@@ -6,15 +6,15 @@
 </head>
 <body>
 
-<form method="post">
+<form action="/signup/" method="post">
     {% csrf_token %}
     {{ form.as_p }}
 
     <button type="submit">Register</button>
 </form>
 
-<p class="">Already have an account?
-    <a href="{% url 'accounts:login' %}" class="nav-item nav-link">Login</a>
+<p>Already have an account?
+    <a href="{% url 'accounts:login' %}">Login</a>
 </p>
 
 </body>

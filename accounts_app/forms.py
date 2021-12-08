@@ -11,22 +11,13 @@ class LoginForm(AuthenticationForm):
 
     error_css_class = 'error'
     required_css_class = 'required'
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username',
-                                                             'class': 'form-control',
-                                                             }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password',
-                                                                 'class': 'form-control',
-                                                                 }))
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
 
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["username", "email"]
+        fields = ("username", "email")
 
-    error_css_class = 'error'
-    required_css_class = 'required'
-
-    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-input'}))
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
-
+    username = forms.CharField()

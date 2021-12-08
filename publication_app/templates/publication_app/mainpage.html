@@ -9,11 +9,12 @@
 
 <div>
     {% for post in posts %}
-    <a href="{% url 'publication:post_detail' post.id %}">{{ post.title }}</a>
+    <br>
+    <a href="{% url 'profile:profile' post.user %}">{{ post.user }}</a>
     {% if post.image %}
     <div><img src="{{ post.image.url }}" alt=""></div>
+    <a href="{% url 'publication:post_detail' post.id %}">{{ post.title }}</a>
     {% endif %}
-    <a href="{% url 'profile:profile' post.user %}">{{ post.user }}</a>
     <div>{{ post.text }}</div>
     <br>
     {% endfor %}
