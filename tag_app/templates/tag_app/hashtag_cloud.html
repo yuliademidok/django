@@ -1,0 +1,20 @@
+{% extends "publication_app/base.html" %}
+
+{% block content %}
+{% load tag_extras %}
+
+<div>
+    <form method="get" action="{% url 'publication:add_post' %}">
+        <button type="submit">Create new post</button>
+    </form>
+</div>
+<br>
+
+{% for tag in tags %}
+<div>
+    <a href="{% url 'tag:hashtag_posts' tag.name %}">#{{ tag.name }}</a> {{ tag.post.count }} posts
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}

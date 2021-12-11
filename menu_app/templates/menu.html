@@ -1,0 +1,11 @@
+{% for item in menu %}
+
+<a href="{{ item.url }}">
+    {% if item.icon %}
+    <img src="{{ item.icon.url }}" alt="Image" height="42" width="42">
+    {% else %}
+    {{ item.title }}
+    {% endif %}
+</a>
+
+{% endfor %}

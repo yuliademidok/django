@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load menu_tags %}
 <link rel="stylesheet" type="text/css" href="{% static 'publication_app/style.css' %}">
 <html lang="en">
 <head>
@@ -8,15 +9,19 @@
 </head>
 <body>
 
+<div id="menu">
+    {% menu %}
+</div>
+
 <article>
     <header>
-        <form method="get" action="{% url 'publication:main_page' %}">
-            <button type="submit">Go to the main page</button>
-            <a href="{% url 'profile:profile' user.profile %}">My profile</a>
-            <a href="{% url 'accounts:logout' %}">Logout</a>
+        <form method="get">
+            <a href="{% url 'accounts:profile' user %}">My profile</a>
         </form>
     </header>
 </article>
+
+<br>
 
 {% block content %}{% endblock %}
 

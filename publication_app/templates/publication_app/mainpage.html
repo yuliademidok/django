@@ -1,6 +1,8 @@
 {% extends "publication_app/base.html" %}
 
 {% block content %}
+{% load tag_extras %}
+
 <div>
     <form method="get" action="{% url 'publication:add_post' %}">
         <button type="submit">Create new post</button>
@@ -10,12 +12,13 @@
 <div>
     {% for post in posts %}
     <br>
-    <a href="{% url 'profile:profile' post.user %}">{{ post.user }}</a>
+    <img src="{{ post.user.profile.avatar.url }}" alt="Image" height="30" width="30">
+    <a href="{% url 'accounts:profile' post.user %}">{{ post.user }}</a>
     {% if post.image %}
-    <div><img src="{{ post.image.url }}" alt=""></div>
-    <a href="{% url 'publication:post_detail' post.id %}">{{ post.title }}</a>
+    <div><img src="{{ post.image.url }}" alt="Image" height="400" width="400"></div>
     {% endif %}
-    <div>{{ post.text }}</div>
+    <a href="{% url 'publication:post_detail' post.id %}">{{ post.title }}</a>
+    <div>{{ post.text|hashtag_links }}</div>
     <br>
     {% endfor %}
 

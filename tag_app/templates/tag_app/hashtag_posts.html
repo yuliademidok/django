@@ -1,0 +1,30 @@
+{% extends "publication_app/base.html" %}
+
+{% block content %}
+{% load tag_extras %}
+
+<div>
+    <form method="get" action="{% url 'publication:add_post' %}">
+        <button type="submit">Create new post</button>
+    </form>
+</div>
+<br>
+
+<a href="{% url 'tag:hashtag_cloud' %}">See more hashtags</a>
+
+
+<h2>#{{ tag.name }}</h2>
+<div>{{ tag.post.count }} posts</div>
+<br>
+
+{% for post in tag.post.all %}
+<a href="{% url 'publication:post_detail' post.id %}">{{ post.title }}</a>
+{% if post.image %}
+<div><img src="{{ post.image.url }}" alt=""></div>
+{% endif %}
+<a href="{% url 'accounts:profile' post.user.profile %}">{{ post.user }}</a>
+<div>{{ post.text|hashtag_links }}</div>
+<br>
+{% endfor %}
+
+{% endblock %}

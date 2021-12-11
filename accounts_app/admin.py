@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from profile_app.models import Profile
-from .models import User
+from .models import User, Profile
 
 
 class ProfileInLint(admin.StackedInline):

@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<!--{% if error %}-->
+<!--<div>Invalid username of password</div>-->
+<!--{% endif %}-->
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

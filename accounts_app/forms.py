@@ -1,7 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django import forms
 
-from accounts_app.models import User
+from accounts_app.models import User, Profile
 
 
 class LoginForm(AuthenticationForm):
@@ -9,8 +9,6 @@ class LoginForm(AuthenticationForm):
         model = User
         fields = ['username', 'password']
 
-    error_css_class = 'error'
-    required_css_class = 'required'
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
@@ -21,3 +19,16 @@ class SignUpForm(UserCreationForm):
         fields = ("username", "email")
 
     username = forms.CharField()
+
+
+class UpdateProfileForm(UserChangeForm):
+    class Meta:
+        model = Profile
+        fields = ("avatar", "bio", "phone", "github",)
+
+
+class UpdateUserForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ("email",)
+
