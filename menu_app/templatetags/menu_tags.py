@@ -1,6 +1,7 @@
 from itertools import chain
 
 from django import template
+
 from ..models import Menu
 
 register = template.Library()
@@ -9,7 +10,6 @@ register = template.Library()
 @register.inclusion_tag("menu.html", takes_context=True)
 def menu(context):
     menu = Menu.objects.get(menu_label="main_menu")
-    # profile = [{"url": context.request.user.username, "title": "My Profile"}]
     # return {"menu": chain(profile, menu.links.order_by("priority").all())}
     return {"menu": menu.links.order_by("priority").all()}
 

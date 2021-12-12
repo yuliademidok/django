@@ -12,7 +12,7 @@
 <br>
 
 {% if profile == request.user.profile %}
-<form method="get" action="{% url 'accounts:update_profile' %}">
+<form method="get" action="{% url 'accounts:edit_profile' %}">
     <button type="submit">Edit profile</button>
 </form>
 {% endif %}
