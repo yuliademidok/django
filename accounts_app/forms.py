@@ -21,14 +21,14 @@ class SignUpForm(UserCreationForm):
     username = forms.CharField()
 
 
-class UpdateProfileForm(UserChangeForm):
+class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ("avatar", "bio", "phone", "github",)
 
 
-class UpdateUserForm(UserChangeForm):
+class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("email",)
-
+        fields = ("email", )
+        exclude = ("password", )

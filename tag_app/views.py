@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.shortcuts import render
 from django.views import generic
@@ -5,7 +6,7 @@ from django.views import generic
 from tag_app.models import Tag
 
 
-class HashTagView(generic.View):
+class HashTagView(LoginRequiredMixin, generic.View):
     template_name = "tag_app/hashtag_posts.html"
 
     def get(self, request, hashtag, *args, **kwargs):
@@ -13,7 +14,7 @@ class HashTagView(generic.View):
         return render(request, self.template_name, {"tag": tag})
 
 
-class HashTagCloudView(generic.ListView):
+class HashTagCloudView(LoginRequiredMixin, generic.ListView):
     template_name = "tag_app/hashtag_cloud.html"
 
     def get(self, request, *args, **kwargs):

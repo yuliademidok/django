@@ -1,9 +1,8 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from accounts_app.forms import LoginForm, SignUpForm, UpdateUserForm, UpdateProfileForm
@@ -78,26 +77,8 @@ class UpdateProfileView(LoginRequiredMixin, generic.UpdateView):
             if profile_form.is_valid():
                 profile_form.save()
                 user_form.save()
-                messages.success(request, 'Your profile is updated successfully')
-                return redirect(to="profile:profile")
+                return redirect(reverse("accounts:profile", args=[request.user.username]))
         else:
             user_form = UpdateUserForm(instance=request.user)
             profile_form = UpdateProfileForm(instance=request.user.profile)
         return render(request, self.template_name, {'user_form': user_form, 'profile_form': profile_form})
-
-# @login_required
-# def update_profile(request):
-#     template_name = "accounts_app/update_profile.html"
-#     if request.method == 'POST':
-#         user_form = UpdateUserForm(request.POST, instance=request.user)
-#         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
-#         if user_form.is_valid():
-#             profile_form.save()
-#             user_form.save()
-#             messages.success(request, 'Your profile is updated successfully')
-#             return redirect(to="profile")
-#     else:
-#         user_form = UpdateUserForm(instance=request.user)
-#         profile_form = UpdateProfileForm(instance=request.user.profile)
-#     return render(request, template_name, {'user_form': user_form, 'profile_form': profile_form})
-

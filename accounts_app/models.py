@@ -17,7 +17,7 @@ class Profile(models.Model):
     phone = models.CharField(
         max_length=16,
         validators=(
-            RegexValidator(regex=r"^\+?\d{8, 15}$", message="Invalid phone number"),
+            RegexValidator(regex=r"^\+?\d{8,15}$", message="Invalid phone number"),
         ),
         blank=True,
         null=True,

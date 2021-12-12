@@ -33,17 +33,17 @@ class PostCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'publication_app/add_post.html'
 
     def get(self, request, *args, **kwargs):
-        formset = PostForm()
-        context = {'formset': formset}
+        form = PostForm()
+        context = {'form': form}
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
-            formset = PostForm(request.POST, request.FILES)
-            if formset.is_valid():
-                data = formset.cleaned_data
+            form = PostForm(request.POST, request.FILES)
+            if form.is_valid():
+                data = form.cleaned_data
                 post = Post.objects.create(**data, user=request.user)
                 return redirect(post)
         else:
-            formset = PostForm()
-        return render(request, self.template_name, {'formset': formset})
+            form = PostForm()
+        return render(request, self.template_name, {'form': form})
