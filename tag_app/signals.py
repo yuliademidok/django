@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from publication_app.models import Post
-from tag_app.models import Tag
+from .models import Tag
 
 
 @receiver(post_save, sender=Post)
@@ -14,6 +14,9 @@ def create_tag(sender, instance, created, **kwargs):
         pattern = re.compile(r"#(\w+)")
         tags = pattern.findall(instance.text.lower())
         for tag_name in tags:
+
+            # tag, is_created = Tag.objects.get_or_create(name=tag_name)
+
             tag = Tag(name=tag_name)
             try:
                 tag.save()

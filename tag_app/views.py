@@ -10,7 +10,8 @@ class HashTagView(LoginRequiredMixin, generic.View):
     template_name = "tag_app/hashtag_posts.html"
 
     def get(self, request, hashtag, *args, **kwargs):
-        tag, created = Tag.objects.get_or_create(name=hashtag.lower())
+        # tag, created = Tag.objects.get_or_create(name=hashtag.lower())
+        tag = Tag.objects.filter(name=hashtag.lower()).first()
         return render(request, self.template_name, {"tag": tag})
 
 

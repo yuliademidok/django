@@ -2,7 +2,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
@@ -51,12 +51,11 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
     context_object_name = "profile"
 
     def __get_user(self):
-        slug = Profile.objects.get(slug=self.kwargs.get('slug'))
-        user = User.objects.get(username=slug)
-        return user
+        # return User.objects.get(username=self.kwargs.get('slug'))
+        return get_object_or_404(User, username=self.kwargs.get('slug'))
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        data = super(ProfileView, self).get_context_data(**kwargs)
+        data = super().get_context_data(**kwargs)
         data["title"] = self.__get_user().username
         data["posts"] = Post.objects.filter(user=self.__get_user().pk)
         return data

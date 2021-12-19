@@ -10,11 +10,14 @@ class MainView(LoginRequiredMixin, generic.ListView):
     template_name = "publication_app/mainpage.html"
     context_object_name = "posts"
 
-    def get_queryset(self):
-        return Post.objects.filter(is_public=True, ).order_by("-create_date", "-id").all()
+    http_method_names = ["get", ]
+
+    queryset = Post.objects.filter(is_public=True, ).order_by("-create_date", "-id").all()
+    # def get_queryset(self):
+    #     return Post.objects.filter(is_public=True, ).order_by("-create_date", "-id").all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        data = super(MainView, self).get_context_data(**kwargs)
+        data = super().get_context_data(**kwargs)
         data["title"] = "Awesome site"
         return data
 
