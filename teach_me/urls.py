@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularRedocView, SpectacularAPIView, SpectacularSwaggerView
 
+from accounts_app.api.router import api_router as user_router
 from publication_app.api.router import api_router as publication_router
 from tag_app.api.router import api_router as tag_router
 from likes_app.api.router import api_router as like_router
@@ -37,6 +38,7 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(),
         name="swagger-ui",
     ),
+    path('users/', include(user_router.urls)),
     path('posts/', include(publication_router.urls)),
     path('tags/', include(tag_router.urls)),
     path('likes/', include(like_router.urls)),
