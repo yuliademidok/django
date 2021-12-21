@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "publication_app",
     "accounts_app",
+    "subscriptions_app",
     "menu_app",
     "likes_app",
     "comments_app",
