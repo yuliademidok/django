@@ -38,13 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "publication_app",
     "accounts_app",
-    "subscriptions_app",
+    "followers_app",
     "menu_app",
     "likes_app",
     "comments_app",
     "tag_app",
     "rest_framework",
     "django_filters",
+    "rest_framework_simplejwt",
     "drf_spectacular",
 ]
 
@@ -145,6 +146,9 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 20,
     "MAX_PAGE_SIZE": 100,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 SPECTACULAR_SETTINGS = {
