@@ -13,3 +13,8 @@ class FollowerSerializers(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault(),
         source="follower_user",
     )
+
+    def validate(self, data):
+        if data["follower_user"] == data["following_user"]:
+            raise serializers.ValidationError("Following yourself is not allowed")
+        return data

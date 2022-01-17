@@ -31,7 +31,7 @@ class UserViewSet(GenericViewSet, RetrieveModelMixin, ListModelMixin, CreateMode
 
     @action(methods=["get"], url_path='post/likes/(?P<post_id>[^/.]+)', detail=False)
     def post_likes(self, request, post_id=None):
-        queryset = User.objects.filter(likes__post=post_id).all()
+        queryset = User.objects.filter(likes__post=post_id)
 
         page = self.paginate_queryset(queryset)
         if page is not None:

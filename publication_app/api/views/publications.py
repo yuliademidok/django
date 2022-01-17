@@ -5,9 +5,7 @@ from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveMode
 from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from rest_framework import permissions
 
-from publication_app.api.filters.publications import PostsFilterSet
 from publication_app.api.serializers.publications import PostSerializer
 from publication_app.models import Post
 
@@ -15,14 +13,13 @@ from tag_app.api.serializers.tag import TagDetailSerializer
 
 
 class PostsViewSet(GenericViewSet, ListModelMixin, CreateModelMixin, RetrieveModelMixin):
-    # permission_classes = [TestPermission, ]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(is_public=True)
 
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend, ]
     ordering_fields = ["-create_date", ]
 
-    filter_class = PostsFilterSet
+    # filter_class = PostsByTagFilter
     # filterset_fields = ("tags__name", )
 
     parser_classes = [MultiPartParser, JSONParser]

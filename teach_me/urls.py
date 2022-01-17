@@ -41,7 +41,7 @@ urlpatterns = [
         name="swagger-ui",
     ),
     path('users/', include(user_router.urls)),
-    path('follower/', include(follower_router.urls)),
+    path('followers/', include(follower_router.urls)),
     path('posts/', include(publication_router.urls)),
     path('tags/', include(tag_router.urls)),
     path('likes/', include(like_router.urls)),

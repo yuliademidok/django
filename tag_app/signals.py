@@ -8,7 +8,7 @@ from publication_app.models import Post
 from .models import Tag
 
 
-# @receiver(post_save, sender=Comment)
+@receiver(post_save, sender=Comment)
 @receiver(post_save, sender=Post)
 def create_tag(sender, instance, created, **kwargs):
     if created:
@@ -16,4 +16,7 @@ def create_tag(sender, instance, created, **kwargs):
         tags = pattern.findall(instance.text.lower())
         for tag_name in tags:
             tag, is_created = Tag.objects.get_or_create(name=tag_name)
-            tag.post.add(instance)
+            if isinstance(instance, Comment):
+                tag.comment.add(instance)
+            elif isinstance(instance, Post):
+                tag.post.add(instance)

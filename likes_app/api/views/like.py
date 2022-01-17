@@ -12,7 +12,7 @@ class LikeViewSet(GenericViewSet, CreateModelMixin):
     serializer_class = LikeSerializer
     queryset = Like.objects.all()
 
-    @action(methods=["post"], url_path='comments', detail=False, serializer_class=LikeCommentSerializer)
+    @action(methods=["post"], url_path='comment', detail=False, serializer_class=LikeCommentSerializer)
     def create_comment_like(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
