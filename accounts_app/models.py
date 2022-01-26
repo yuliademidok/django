@@ -13,7 +13,7 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT, null=False, related_name="profile")
-    avatar = models.ImageField(default='default.png', upload_to='profile_images')
+    avatar = models.ImageField(default='profile_images/default.png', upload_to='profile_images')
     phone = models.CharField(
         max_length=16,
         validators=(
