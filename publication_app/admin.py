@@ -8,7 +8,7 @@ from .models import Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("id", "create_date", "title", )
+    list_display = ("id", "create_date", "title", "image", )
     ordering = ("-create_date", "-id", )
     readonly_fields = ("create_date", )
     search_fields = ['title']

@@ -30,6 +30,7 @@ from comments_app.api.router import api_router as comment_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
     path("", include("publication_app.urls")),
     path("", include("accounts_app.urls")),
     path("", include("tag_app.urls")),

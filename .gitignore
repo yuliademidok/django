@@ -130,3 +130,7 @@ dmypy.json
 
 media/
 .media/
+
+static/
+staticfiles/
+teach_me_cache/

@@ -12,9 +12,10 @@ class MainView(LoginRequiredMixin, generic.ListView):
 
     http_method_names = ["get", ]
 
-    queryset = Post.objects.filter(is_public=True, ).order_by("-create_date", "-id").all()
-    # def get_queryset(self):
-    #     return Post.objects.filter(is_public=True, ).order_by("-create_date", "-id").all()
+    queryset = Post.objects.filter(is_public=True, ).order_by("-create_date", "-id").select_related(
+        "user",
+        "user__profile"
+    )
 
     def get_context_data(self, *, object_list=None, **kwargs):
         data = super().get_context_data(**kwargs)

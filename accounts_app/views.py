@@ -8,7 +8,6 @@ from django.views import generic
 
 from accounts_app.forms import LoginForm, SignUpForm, UpdateUserForm, UpdateProfileForm
 from accounts_app.models import User, Profile
-from publication_app.models import Post
 
 
 class Login(LoginView):
@@ -52,12 +51,12 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
 
     def __get_user(self):
         # return User.objects.get(username=self.kwargs.get('slug'))
-        return get_object_or_404(User, username=self.kwargs.get('slug'))
+        return get_object_or_404(User.objects.prefetch_related("posts"), username=self.kwargs.get('slug'))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         data = super().get_context_data(**kwargs)
         data["title"] = self.__get_user().username
-        data["posts"] = Post.objects.filter(user=self.__get_user().pk)
+        data["posts"] = self.__get_user().posts.all()
         return data
 
 

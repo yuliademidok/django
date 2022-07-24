@@ -21,4 +21,4 @@ class Post(models.Model):
         return reverse("publication:post_result", kwargs={'pk': self.pk})
 
     class Meta:
-        ordering = ['-create_date']
+        ordering = ['-create_date', '-id']

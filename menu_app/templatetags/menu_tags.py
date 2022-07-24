@@ -2,14 +2,21 @@ from itertools import chain
 
 from django import template
 
-from ..models import Menu
+from ..models import Menu, MenuItem
 
 register = template.Library()
 
 
 @register.inclusion_tag("menu.html", takes_context=True)
 def menu(context):
-    menu = Menu.objects.get(menu_label="main_menu")
+    try:
+        menu = Menu.objects.get(menu_label="main_menu")
+    except Menu.DoesNotExist as exc:
+        menu = Menu.objects.create(menu_label="main_menu")
+        MenuItem.objects.create(menu=menu, title="logout", url="/logout/", priority="40")
+        MenuItem.objects.create(menu=menu, title="main_page", url="/", priority="10")
+        menu = Menu.objects.get(menu_label="main_menu")
+
     # return {"menu": chain(profile, menu.links.order_by("priority").all())}
     return {"menu": menu.links.order_by("priority").all()}
 

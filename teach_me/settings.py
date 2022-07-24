@@ -31,6 +31,8 @@ DEBUG = (os.environ.get("DEBUG_VALUE") == "True")
 
 ALLOWED_HOSTS = ["*", "127.0.0.1"]
 
+INTERNAL_IPS = ["*", "127.0.0.1"]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework_simplejwt",
     "drf_spectacular",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -61,11 +64,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 # MIDDLEWARE_CLASSES = (
 #     # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
+#     # https://warehouse.python.org/project/whitenoise/
 #     'whitenoise.middleware.WhiteNoiseMiddleware',
 # )
 
@@ -171,6 +175,13 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "0.0.1",
     "COMPONENT_SPLIT_REQUEST": True,
     "SWAGGER_UI_SETTINGS": {"deepLinking": True, "persistAuthorization": True, "displayOperationId": True, },
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'teach_me_cache'),
+    }
 }
 
 django_heroku.settings(locals())

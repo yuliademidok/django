@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load menu_tags %}
+{% load cache %}
 <link rel="stylesheet" type="text/css" href="{% static 'publication_app/style.css' %}">
 <html lang="en">
 <head>
@@ -9,9 +10,11 @@
 </head>
 <body>
 
+{% cache 60 * 2 menu %}
 <div id="menu">
     {% menu %}
 </div>
+{% endcache %}
 
 <article>
     <header>

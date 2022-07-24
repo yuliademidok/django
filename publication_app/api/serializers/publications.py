@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from likes_app.api.serializers.like import LikeSerializer, LikePostSerializer
+from likes_app.api.serializers.like import LikePostSerializer
 from tag_app.api.serializers.tag import TagSerializer
 from ...models import Post
 

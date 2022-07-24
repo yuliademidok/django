@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 
 from .models import Post
 
@@ -10,3 +11,6 @@ class PostForm(ModelForm):
 
     error_css_class = 'error'
     required_css_class = 'required'
+
+    title = forms.CharField(label="Subject")
+    # text = forms.CharField(widget=forms.Textarea)
